@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+  <record id="estate_property_view_list" model="ir.ui.view">
+    <field name="name">estate.property.view.list</field>
+    <field name="model">estate.property</field>
+    <field name="arch" type="xml">
+      <!-- <search string="Test">
+        <field name="name" />
+        <field name="bedroom" />
+      </search> -->
+
+      <list string="Properties">
+        <field name="name" />
+        <field name="description" />
+        <field name="date_availability" />
+        <field name="expected_price" />
+        <field name="bedroom" />
+        <field name="garden" />
+        <field name="garden_orientation" />
+      </list>
+
+      <!-- <form string="Test">
+        <sheet>
+          <group>
+            <group>
+              <field name="name" />
+            </group>
+            <group>
+              <field name="bedroom" />
+            </group>
+          </group>
+          <notebook>
+            <page string="Description">
+              <field name="description" />
+            </page>
+          </notebook>
+        </sheet>
+      </form> -->
+    </field>
+  </record>
+
+  <!-- <record id="estate_property_view_form" model="ir.ui.view">
+    <field name="name">estate.property.view.list</field>
+    <field name="model">estate.property</field>
+    <field name="arch" type="xml">
+      <form string="Test">
+        <sheet>
+          <group>
+            <group>
+              <field name="name" />
+            </group>
+            <group>
+              <field name="bedroom" />
+            </group>
+          </group>
+          <notebook>
+            <page string="Description">
+              <field name="description" />
+            </page>
+          </notebook>
+        </sheet>
+      </form>
+    </field>
+  </record> -->
+
+</odoo>
