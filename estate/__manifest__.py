@@ -7,8 +7,9 @@
     "depends": ["base"],  # dependencies
     "data": [
         "security/ir.model.access.csv",
-        "views/test_model.xml",
-        "views/estate_property_views.xml"
+        "views/estate_property_menu.xml",
+        "views/estate_property_views.xml",
+        "views/estate_property_offer_views.xml"
     ],
     "installable": True,
     'license': 'LGPL-3',
