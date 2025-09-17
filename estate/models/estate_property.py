@@ -5,6 +5,7 @@ _logger = logging.getLogger(__name__)
 class EstateProperty(models.Model):
   _name = 'estate.property'
   _description = 'Estate property'
+  _order = 'id desc'
 
   name = fields.Char(string='name', require=True, default="Unknown")
   description = fields.Text(string="Description")
@@ -38,6 +39,8 @@ class EstateProperty(models.Model):
   offer_ids = fields.One2many("estate.property.offer", "property_id")
   total_area = fields.Float(compute="_compute_total_area", readonly=True)
   best_price = fields.Float(compute="_compute_best_price")
+  sequence = fields.Integer()
+
 
 
   @api.depends("living_area", "garden_area")
@@ -78,3 +81,10 @@ class EstateProperty(models.Model):
     for record in self:
       if record.expected_price < 0 or record.selling_price < 0 or record.best_price < 0:
         raise ValidationError("You must set a positive price")
+
+  @api.constrains("selling_price", "expected_price")
+  def _check_selling_price(self):
+    for record in self:
+      if record.selling_price:
+        if record.selling_price < record.expected_price * 0.9:
+          raise ValidationError("The selling price must be at least 90% of the expected price")

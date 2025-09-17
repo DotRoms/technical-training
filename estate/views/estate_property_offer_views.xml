@@ -7,12 +7,12 @@
     <field name="arch" type="xml">
       <list string="Informations">
         <field name="price" />
-        <field name="status" />
         <field name="partner_id" widget="many2one" />
-        <button name="accept" type="object" class="oe_stat_button" icon="fa-check-circle" />
-        <button name="refuse" type="object" class="oe_stat_button" icon="fa-times-circle" />
+        <field name="validity" string="Validity (days)" />
+        <field name="date_deadline" string="Deadline" />
+        <button name="accept" type="object" class="oe_stat_button" icon="fa-check" />
+        <button name="refuse" type="object" class="oe_stat_button" icon="fa-times" />
         <field name="status" />
-        <field name="property_id" widget="many2one" />
       </list>
     </field>
   </record>
@@ -21,7 +21,7 @@
     <field name="name">estate.property.offer.form.view</field>
     <field name="model">estate.property.offer</field>
     <field name="arch" type="xml">
-      <form string="Test">
+      <form string="Offer">
         <sheet>
           <group>
             <field name="price" />
@@ -29,7 +29,6 @@
             <field name="partner_id" widget="many2one" />
             <field name="property_id" widget="many2one" />
           </group>
-
         </sheet>
       </form>
     </field>

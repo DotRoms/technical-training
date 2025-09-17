@@ -6,17 +6,19 @@
     <field name="model">estate.property</field>
     <field name="arch" type="xml">
 
-      <list string="Properties">
+      <list string="Properties" editable='bottom'
+        decoration-success="state in ['offer_received', 'offer_accepted']"
+        decoration-muted="state == 'sold'">
         <field name="name" />
-        <field name="postcode" />
-        <field name="bedroom" />
-        <field name="living_area" />
-        <field name="expected_price" />
-        <field name="selling_price" />
-        <field name="date_availability" />
-        <field name="tag_ids" widget="many2many" />
+        <field name="postcode" readonly='1' />
+        <field name="bedroom" readonly='1' />
+        <field name="living_area" readonly='1' />
+        <field name="expected_price" readonly='1' />
+        <field name="selling_price" readonly='1' />
+        <field name="date_availability" readonly='1' />
+        <field name="tag_ids" widget="many2many_tags" readonly='1'
+          options="{'color_field': 'color'}" />
       </list>
-
     </field>
   </record>
 
@@ -30,6 +32,8 @@
             invisible="state in ['sold']" />
           <button name="sold" type="object" class="btn-primary" string="Sold"
             invisible="state in ['cancelled']" />
+          <field name="state" widget="statusbar"
+            statusbar_visible="new,offer_received,offer_accepted,sold,cancelled" />
         </header>
         <sheet>
           <!-- Titre -->
@@ -44,7 +48,8 @@
             <group>
               <field name="state" />
               <field name="property_type_id" />
-              <field name="tag_ids" widget="many2many_tags" />
+              <field name="tag_ids" widget="many2many_tags" options="{'color_field': 'color'}"
+              />
             </group>
 
           </group>
@@ -120,6 +125,30 @@
           <filter name="postcode" string="Postcode" context="{'group_by':'postcode'}" />
         </group>
       </search>
+    </field>
+  </record>
+
+  <record id="estate_property_view_kanban" model="ir.ui.view">
+    <field name="name">estate_property.view.kanban</field>
+    <field name="model">estate.property</field>
+    <field name="arch" type="xml">
+      <kanban>
+        <templates>
+          <t t-name="kanban-box">
+            <strong>
+              <field name="name" />
+            </strong>
+            <div>Expected: <field name="expected_price" /></div>
+            <div t-if="!record.offer_ids"> Best price: <field name="best_price" />
+            </div>
+            <div t-if="record.state == 'offer_accepted'"> Selling price: <field
+                name="selling_price" />
+            </div>
+            <field name="tag_ids" widget="many2many_tags" options="{'color_field': 'color'}" />
+          </t>
+        </templates>
+      </kanban>
+
     </field>
   </record>
 

@@ -2,10 +2,11 @@ from odoo import models, fields, api, _
 import logging
 _logger = logging.getLogger(__name__)
 
-class EstateProperty_offer(models.Model):
+class EstatePropertyOffer(models.Model):
   _name = "estate.property.offer"
-  _desription = "Estate Property Offer"
-
+  _description = "Estate Property Offer"
+  _order = "price desc"
+  
   price = fields.Float()
   status = fields.Selection(copy=False, selection=[
     ("accepted", "Accepted"),
